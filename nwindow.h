@@ -3,8 +3,6 @@
 
 #define MAXCHAR 256
 
-class Nwindow;
-class Nscreen;
 
 #include <iostream>
 #include <fstream>
@@ -21,22 +19,6 @@ using namespace std;
 
 enum COLOR{red, white, blue};
 
-class Nscreen{
-	int MAX_X,MAX_Y, numwindows;
-  SCREEN* scrptr;
-  vector<Nwindow> nwindows;
-	public:
-
-		Nscreen();
-    ~Nscreen();
-    void init_windows();
-		void switch_window(int numwin);
-    void print_color(ifstream& file, COLOR c);
-    void move(int y, int x);
-    void clear();
-
-};
-
 
 class Nwindow{
 	int pos_x, pos_y, MAX_X = 0;
@@ -48,8 +30,20 @@ class Nwindow{
        Nwindow();
        Nwindow(int len_y, int len_x, int x, int y);
 
-       template<typename T>void move(T y, T x);
-       template<typename T>void move_over(T x, T y);
+       //template<typename T,typename U>void move(T y, U x);
+       //template<typename T>void move_over(T x, T y);
+
+       template<typename T, typename U> void move(T y, U x){
+         pos_y = int(y)%MAX_Y; pos_x = int(x)%MAX_X;
+         wmove(winptr,pos_y,pos_x);
+         wrefresh(winptr);
+       
+       }
+       
+       template<typename T> void move_over(T dy,T dx){
+         pos_y += int(dy); pos_x += int(dx);
+         wmove(winptr,pos_y,pos_x);
+       }
 
        template<typename T> void print_color(T x, COLOR c ) {
            cout <<"Variable " <<typeid(T).name() << " is not supported" << endl;
