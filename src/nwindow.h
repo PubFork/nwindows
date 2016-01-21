@@ -44,10 +44,10 @@ class Nwindow{
          pos_y += int(dy); pos_x += int(dx);
          wmove(winptr,pos_y,pos_x);
        }
-
+      /*
        template<typename T> void print_color(T x, COLOR c ) {
            cout <<"Variable " <<typeid(T).name() << " is not supported" << endl;
-       }
+       }*/
        void print_color(ifstream& file, COLOR c);
        void print_color(string str, COLOR c);
        void print_color(double* da, COLOR c, int startp);
@@ -57,7 +57,8 @@ class Nwindow{
     	 
        void print_line(string line, COLOR c);
        void initialize_colors();
-       void reset_color();
+       void set_bkg_color(COLOR c);
+       void reset_color(COLOR c);
        void set_color(COLOR c);
        int get_start(string str);
        int get_end(string str);

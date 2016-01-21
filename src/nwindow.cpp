@@ -8,7 +8,7 @@ Nwindow::Nwindow(){
 }
 
 
-Nwindow::Nwindow(int len_y, int len_x, int x, int y){
+Nwindow::Nwindow(int len_y, int len_x, int y, int x){
     winptr = newwin(len_y, len_x, y, x);
     pos_y = 0; pos_x =0;
     MAX_Y = len_y; 
@@ -89,7 +89,7 @@ void Nwindow::set_color(COLOR c){
 }
 
 
-void Nwindow::reset_color(void){
+void Nwindow::reset_color(COLOR c){
 	wattroff(winptr,COLOR_PAIR(1));
 }
 

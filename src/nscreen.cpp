@@ -1,8 +1,8 @@
 #include "nscreen.h"
 
-Nscreen::Nscreen(int numwindows){
+Nscreen::Nscreen(){
     //default constructor uses stdin and out
-    this.numwindows = numwindows;
+    this->numwindows = 1;
     scrptr = newterm("xterm",stdin,stdout);    
     set_term(scrptr);
     getmaxyx(stdscr,MAX_Y, MAX_X);
@@ -11,7 +11,23 @@ Nscreen::Nscreen(int numwindows){
     init_pair(1,COLOR_WHITE,COLOR_BLUE);
 
     init_windows();
+    cw=0;
 }
+
+Nscreen::Nscreen(int numwindows){
+    //default constructor uses stdin and out
+    this->numwindows = numwindows;
+    scrptr = newterm("xterm",stdin,stdout);    
+    set_term(scrptr);
+    getmaxyx(stdscr,MAX_Y, MAX_X);
+
+    start_color();
+    init_pair(1,COLOR_WHITE,COLOR_BLUE);
+
+    init_windows();
+    cw=0;
+}
+
 
 Nscreen::~Nscreen(){
    delscreen(scrptr);
@@ -26,15 +42,10 @@ void Nscreen::init_windows(){
     }
 }
 
-void Nscreen::print_color(ifstream& file ,COLOR c){
-	nwindows[0].print_color(file,c);
+void Nscreen::next_win(){
+      cw =(cw + 1) % numwindows;
 }
-
-void Nscreen::print_color(string str ,COLOR c){
-    nwindows[0].print_color(str,c);
-}
-
 
 void Nscreen::clear(){
-	nwindows[0].clear();
+	nwindows[cw].clear();
 }

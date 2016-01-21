@@ -10,6 +10,7 @@
 #include <vector>
 
 #include <typeinfo>
+#include "nscreen.h"
 #include "nwindow.h"
 extern "C"
 {
@@ -23,20 +24,24 @@ class Nscreen{
 	int MAX_X,MAX_Y, numwindows;
   SCREEN* scrptr;
   vector<Nwindow> nwindows;
+  int cw;
 
 	public:
 
-		Nscreen();
+    Nscreen();
+		Nscreen(int numwindows);
     ~Nscreen();
     void init_windows();
 		void switch_window(int numwin);
-    void print_color(ifstream& file, COLOR c);
-    void print_color(string str, COLOR c);
-
-    //template<typename T, typename U>void move(T y, U x);
     void clear();
+    void next_win();
+
+    template<typename P, typename Q>void print(P& obj, Q c){
+        nwindows[cw].print_color(obj,c);
+    }
+
     template<typename T,typename U> void move(T y, U x){
-      nwindows[0].move(y,x);
+      nwindows[cw].move(y,x);
     }
 };
 
