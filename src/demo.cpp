@@ -12,24 +12,24 @@ int main(){
     string str2 = "win 2";
 
     int i = 50;
-    //Animation test
-    /*for( ; ; ){
+   // Animation test
+    for( ; ; ){
         double y = 2*sin(i) + 10;
         usleep(TIME);
         nscreen->move(y,i++);
-	    ifstream b("whale.txt");
-        nscreen->print(&b,blue);
+        ifstream b("ascii/whale.txt");
+        nscreen->print(b,blue);
         b.close();
         nscreen->move(5,50);
         nscreen->print(str,blue);
         nscreen->clear();
 
-    }*/
-    ifstream sq("ascii/square.txt");
+    }
+/*    ifstream sq("ascii/square.txt");
     nscreen->print(sq,blue);
     sq.close();
     nscreen->next_win();
     nscreen->print(str2,blue);
     for (;;){}
-
+*/
 }

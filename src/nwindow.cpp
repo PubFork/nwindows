@@ -20,7 +20,7 @@ void Nwindow::print_color(ifstream& file,COLOR c){
 	 char line[MAXCHAR]; int i = 0;
 	 while(!file.eof()){
 		 file.getline(line, MAXCHAR);
-		 assert(i < MAX_Y && file.gcount() < MAX_X);
+		 //assert(i < MAX_Y && file.gcount() < MAX_X);
 		 ++i;
 		 print_line(string(line),c);
 	 }
@@ -50,7 +50,7 @@ void Nwindow::print_line(string line, COLOR c){
 	int aspace = get_end(line);
         int bspace = get_start(line);
 
-	assert(bspace >= 0 &&  aspace >= 0);
+	//assert(bspace >= 0 &&  aspace >= 0);
 	int prev_x = pos_x;
 	move(pos_y,pos_x + bspace);
 	print_color(line.substr(bspace,line.length() - aspace),c);
